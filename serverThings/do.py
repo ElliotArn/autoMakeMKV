@@ -2,13 +2,15 @@
 import os
 import subprocess, threading, time, re
 
-outputfile="/root/serverThings/output"
+outputdir="output"
 titles=[]
-infoScript="/root/serverThings/info.sh"
+hej="./hej.sh"
+infoScript="./info.sh"
 disk="disc:0"
-makemkvScript="/root/serverThings/mkvScript.sh"
-killFake="/root/serverThings/killFake.sh"
-renameAndSend="/root/serverThings/send.sh"
+makemkvScript="./mkvScript.sh"
+killFake="./KillFake.sh"
+renameAndSend="./send.sh"
+
 
 def makeMkv(title):
     subprocess.run([makemkvScript, disk, title, outputfile])
@@ -19,20 +21,6 @@ def kill():
     if not entries:
         subprocess.run([killFake, makemkvScript])
 
-def parse(data):
-    print(data)
-    matches = re.findall(r".Title #\d+ was added.", data)
-    output = []
-    for l in matches:
-        t = (l.strip()).split(" ")[-1]
-        lis = t.split(":")
-        minutes = lis[1]
-        hours = lis[0]
-        if int(hours) > 0 or int(minutes) > 20:
-            output.append(True)
-        else:
-            output.append(False)
-    return output
 
 thing=subprocess.run([infoScript, disk],capture_output=True)
 
