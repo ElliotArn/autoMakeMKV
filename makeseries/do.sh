@@ -7,8 +7,8 @@ echo "$times"
 for ((i=1; i<=times; i++))
 do
     echo "making episode number '$i' on disk" 
-    mkvScript.sh "$disk" "$i" "$output"
-    send.sh
+    /home/thomas/autoMakeMKV/makeseries/mkvScript.sh "$disk" "$i" "$output"
+    /home/thomas/autoMakeMKV/makeseries/send.sh
 done
 
 printf '\a'
