@@ -1,7 +1,8 @@
 #!/bin/bash
-times="$(info.sh)"
 disk="disc:0" #change this to mach your disk
 output="output" #change this to mach your output
+times="$(/home/thomas/autoMakeMKV/makeseries/info.sh $disk)"
+
 echo "$times"
 
 for ((i=1; i<=times; i++))
